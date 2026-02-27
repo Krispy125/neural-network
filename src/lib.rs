@@ -1,4 +1,3 @@
-use rand::Rng;
 use rand::{Rng, RngCore};
 
 pub fn add(left: u64, right: u64) -> u64 {
@@ -8,12 +7,25 @@ pub fn add(left: u64, right: u64) -> u64 {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use approx::assert_relative_eq;
+    use rand::SeedableRng;
+    use rand_chacha::ChaCha8Rng;
 
     #[test]
+     fn random() {
+        let mut rng = ChaCha8Rng::from_seed(Default::default());
+        let neuron = Neuron::random(&mut rng, 4);
+
+        assert_relative_eq!(neuron.bias, -0.6255188);
+        assert_relative_eq!(neuron.weights.as_slice(),
+         &[0.67383957, 0.8181262, 0.26284897, 0.5238807].as_ref()
+        );
+    }
     fn it_works() {
         let result = add(2, 2);
         assert_eq!(result, 4);
     }
+   
 }
 #[derive(Debug)]
 pub struct Network {
@@ -94,21 +106,6 @@ pub struct LayerTopology {
     pub neurons: usize,
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use rand::SeedableRng;
-    use rand_chacha::ChaCha8Rng;
-
-    #[test]
-    fn random() {
-        let mut rng = ChaCha8Rng::from_sed(Default::default());
-        let neuron = Neuron::random(&mut rng, 4);
-
-        assert_eq!(neuron.bias, 0.0);
-        assert_eq!(neuron.weights, &[0.0, 0.0, 0.0, 0.0]);
-    }
-}
 
 
 
