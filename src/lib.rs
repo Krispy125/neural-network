@@ -22,7 +22,6 @@ impl Network {
         self.layers
             .iter()
             .fold(inputs, |inputs, layer| layer.propogate(inputs));
-        inputs
     }
 }
 
