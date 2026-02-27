@@ -32,16 +32,13 @@ struct Layer {
 
 impl Layer {
     fn propogate(&self, inputs: Vec<f32>) -> Vec<f32> {
-        let mut outputs = Vec::new();
-
-        for neuron in &self.neurons {
-            let output = neuron.propogate(&inputs);
-            outputs.push(output);
-
+        self.neurons
+            .iter()
+            .map(|neuron| neuron.propogate(&inputs))
+            .collect()
         }
-        outputs
     }
-}
+
 
 #[derive(Debug)]
 struct Neuron {
