@@ -18,6 +18,9 @@ pub struct Network {
 }
 
 impl Network {
+    pub fn random(layers: Vec<LayerTopology>) -> Self {
+        todo!()
+    }
     pub fn propogate(&self, mut inputs: Vec<f32>) -> Vec<f32> {
         self.layers
             .iter()
@@ -60,6 +63,10 @@ impl Neuron {
     }
 }
 
+#[derive(Debug)]
+pub struct LayerTopology {
+    pub neurons: usize,
+}
 
 
 
