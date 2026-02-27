@@ -18,13 +18,12 @@ pub struct Network {
 }
 
 impl Network {
-    pub fn random(layers: Vec<LayerTopology>) -> Self {
-        assert!(layers.len() > 1);
-
-        for adjacent_layers in layers.windows(2) {
-            let input_size = adjacent_layers[0].neurons;
-            let output_size = adjacent_layers[1].neurons;
-        }
+    pub fn random(layers: &[LayerTopology]) -> Self {
+        let layers = layers
+            .windows(2)
+            .map(|layers| Layer::random(layers[0].neurons, layers[1].neurons))
+            .collect();
+        Self { layers }
 
     }
     pub fn propogate(&self, mut inputs: Vec<f32>) -> Vec<f32> {
@@ -40,6 +39,14 @@ struct Layer {
 }
 
 impl Layer {
+    fn random(input_size: usize, output_size: usize) -> Self {
+        let neurons = (0..output_size)
+            .map(|_| Neuron::random(input_size))
+            .collect();
+
+        Self { neurons }
+        
+    }
     fn propogate(&self, inputs: Vec<f32>) -> Vec<f32> {
         self.neurons
             .iter()
@@ -56,6 +63,15 @@ struct Neuron {
 }
 
 impl Neuron {
+    fn random(input_size: usize) -> Self {
+        let bias = todo!();
+
+        let wights = (0..input_size)
+            .map(|_| todo!())
+            .collect();
+
+        Self { bias, weights }
+    }
     fn propogate(&self, inputs: &[f32]) -> f32 {
         assert_eq!(inputs.len(), self.weights.len());
         let mut output = 0.0;
