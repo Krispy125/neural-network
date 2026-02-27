@@ -42,5 +42,17 @@ struct Neuron {
     weights: Vec<f32>,
 }
 
+#[derive(Debug)]
+struct Neuron {
+    bias: f32,
+    weights: Vec<f32>,
+}
+
+impl Neuron {
+    fn propogate(&self, inputs: Vec<f32>) -> f32 {
+        todo!()
+    }
+}
+
 
 
