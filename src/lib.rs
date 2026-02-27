@@ -1,9 +1,5 @@
 use rand::{Rng, RngCore};
 
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -12,20 +8,17 @@ mod tests {
     use rand_chacha::ChaCha8Rng;
 
     #[test]
-     fn random() {
+    fn random() {
         let mut rng = ChaCha8Rng::from_seed(Default::default());
         let neuron = Neuron::random(&mut rng, 4);
 
         assert_relative_eq!(neuron.bias, -0.6255188);
-        assert_relative_eq!(neuron.weights.as_slice(),
-         &[0.67383957, 0.8181262, 0.26284897, 0.5238807].as_ref()
+        assert_relative_eq!(
+            neuron.weights.as_slice(),
+            [0.67383957, 0.8181262, 0.26284897, 0.5238807].as_ref()
         );
     }
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+
     #[test]
     fn propogate() {
         let neuron = Neuron {
@@ -98,7 +91,8 @@ struct Neuron {
 
 impl Neuron {
     fn random(rng: &mut dyn RngCore, input_size: usize) -> Self {
-        let mut rng = rand::thread_rng();
+       // let mut rng = rand::thread_rng();
+        use rand::Rng;
         let bias = rng.gen_range(-1.0..=1.0);
 
         let weights = (0..input_size)
