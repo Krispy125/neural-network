@@ -13,7 +13,13 @@ mod tests {
     }
 }
 #[derive(Debug)]
-pub struct Network;
+pub struct Network {
+    layers: Vec<Layer>,
+}
+
+struct Layer {
+    neurons: Vec<Neuron>,
+}
 
 impl Network {
     pub fn propogate(&self, inputs: Vec<f32>) -> Vec<f32> {
