@@ -97,12 +97,16 @@ pub struct LayerTopology {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use rand::SeedableRng;
+    use rand_chacha::ChaCha8Rng;
 
     #[test]
     fn random() {
-        let neuron = Neuron::random(4);
+        let mut rng = ChaCha8Rng::from_sed(Default::default());
+        let neuron = Neuron::random(&mut rng, 4);
 
-        assert!();
+        assert_eq!(neuron.bias, 0.0);
+        assert_eq!(neuron.weights, &[0.0, 0.0, 0.0, 0.0]);
     }
 }
 
