@@ -21,10 +21,29 @@ mod tests {
          &[0.67383957, 0.8181262, 0.26284897, 0.5238807].as_ref()
         );
     }
+    #[test]
     fn it_works() {
         let result = add(2, 2);
         assert_eq!(result, 4);
     }
+    #[test]
+    fn propogate() {
+        let neuron = Neuron {
+            bias: 0.5,
+            weights: vec![-0.3, 0.8]
+        };
+
+        assert_relative_eq!(
+            neuron.propogate(&[-10.0, -10.0]),
+            0.0,
+        );
+
+        assert_relative_eq!(
+            neuron.propogate(&[0.5, 1.0]),
+            (-0.3 * 0.5) + (0.8 * 1.0) + 0.5,
+        );
+    }
+
    
 }
 #[derive(Debug)]
