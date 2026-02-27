@@ -14,3 +14,9 @@ mod tests {
 }
 #[derive(Debug)]
 pub struct Network;
+
+impl Network {
+    pub fn propogate(&self, inputs: Vec<f32>) -> Vec<f32> {
+        todo!()
+    }
+}
