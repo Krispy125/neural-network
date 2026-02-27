@@ -32,7 +32,13 @@ struct Layer {
 
 impl Layer {
     fn propogate(&self, inputs: Vec<f32>) -> Vec<f32> {
-        todo!()
+        let mut outputs = Vec::new();
+
+        for neuron in &self.neurons {
+            let output = neuron.propogate(&inputs);
+
+        }
+        outputs
     }
 }
 
@@ -42,14 +48,8 @@ struct Neuron {
     weights: Vec<f32>,
 }
 
-#[derive(Debug)]
-struct Neuron {
-    bias: f32,
-    weights: Vec<f32>,
-}
-
 impl Neuron {
-    fn propogate(&self, inputs: Vec<f32>) -> f32 {
+    fn propogate(&self, inputs: &[f32]) -> f32 {
         todo!()
     }
 }
