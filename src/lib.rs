@@ -18,13 +18,10 @@ pub struct Network {
 }
 
 impl Network {
-    pub fn propogate(&self, inputs: Vec<f32>) -> Vec<f32> {
-        let mut inputs = inputs;
-
-        for layer in &self.layers {
-            inputs = layer.propogate(inputs);
-        }
-
+    pub fn propogate(&self, mut inputs: Vec<f32>) -> Vec<f32> {
+        self.layers
+            .iter()
+            .fold(inputs, |inputs, layer| layer.propogate(inputs));
         inputs
     }
 }
