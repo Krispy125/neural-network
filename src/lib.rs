@@ -19,7 +19,13 @@ pub struct Network {
 
 impl Network {
     pub fn random(layers: Vec<LayerTopology>) -> Self {
-        todo!()
+        assert!(layers.len() > 1);
+
+        for adjacent_layers in layers.windows(2) {
+            let input_size = adjacent_layers[0].neurons;
+            let output_size = adjacent_layers[1].neurons;
+        }
+
     }
     pub fn propogate(&self, mut inputs: Vec<f32>) -> Vec<f32> {
         self.layers
