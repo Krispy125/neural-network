@@ -21,7 +21,7 @@ impl Network {
     pub fn propogate(&self, mut inputs: Vec<f32>) -> Vec<f32> {
         self.layers
             .iter()
-            .fold(inputs, |inputs, layer| layer.propogate(inputs));
+            .fold(inputs, |inputs, layer| layer.propogate(inputs))
     }
 }
 
@@ -36,6 +36,7 @@ impl Layer {
 
         for neuron in &self.neurons {
             let output = neuron.propogate(&inputs);
+            outputs.push(output);
 
         }
         outputs
